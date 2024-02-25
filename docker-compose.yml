@@ -1,0 +1,46 @@
+version: '3.7'
+
+services:
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      - POSTGRES_USER=postgresuser
+      - POSTGRES_PASSWORD=StrongPassword
+      - POSTGRES_DB=app_db
+    ports:
+      - '5432:5432'
+    networks:
+      - app-network
+
+  redis:
+    image: redis:latest
+    command: redis-server
+    volumes:
+      - redis:/var/lib/redis
+      - redis-config:/usr/local/etc/redis/redis.conf
+    ports:
+      - 6379:6379
+    networks:
+      - app-network
+
+  flask-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - app-network
+    depends_on:
+      - db
+      - redis
+    ports:
+      - "1911:1911"
+
+volumes:
+  postgres_data:
+  redis:
+  redis-config:
+
+networks:
+  app-network:
+    driver: bridge
