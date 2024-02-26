@@ -1,3 +1,5 @@
+[![codecov](https://codecov.io/gh/bmarchete/flask-gps-solid/graph/badge.svg?token=7B8B7182VW)](https://codecov.io/gh/bmarchete/flask-gps-solid)
+
 # Python Flask Travel Distance API
 
 This project is a Python Flask API that calculates the travel distance between two locations. It uses Google Maps API for distance calculation, Redis for caching, and SQLAlchemy for data persistence. The project is structured following the SOLID principles to ensure maintainability, flexibility, and testability.
